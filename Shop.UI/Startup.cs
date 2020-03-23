@@ -27,6 +27,10 @@ namespace Shop.UI
         {
             services.AddRazorPages();
 
+            // fixed 404 error
+            //services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddControllersWithViews();
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
         }
 
@@ -53,6 +57,7 @@ namespace Shop.UI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers(); // fixed 404 error
                 endpoints.MapRazorPages();
             });
         }

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Domain", "Shop.Domain\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Application", "Shop.Application\Shop.Application.csproj", "{41FFC4C1-5663-45BB-A9C7-5D34A191DCAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Database", "Shop.Database\Shop.Database.csproj", "{DD24C572-C573-40F3-94CA-14FF7E7E477A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Database", "Shop.Database\Shop.Database.csproj", "{DD24C572-C573-40F3-94CA-14FF7E7E477A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
