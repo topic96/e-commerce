@@ -35,7 +35,6 @@ namespace Shop.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value
-
             };
         }
 
@@ -48,7 +47,7 @@ namespace Shop.Application.ProductsAdmin
 
         public class Response
         {
-            public int Id { get; internal set; }
+            public int Id { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }

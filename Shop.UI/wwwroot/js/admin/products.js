@@ -1,18 +1,19 @@
 ﻿var app = new Vue({
     el: '#app',
     data: {
+        editing: false,
         loading: false,
         objectIndex: 0,
         productModel: {
             id: 0,
-            name: "Product Name",
-            description: "Product Description",
+            name: "ProductExample1",
+            description: "ProductExample1",
             value: 1.99
         },
-        products: []
+        products: []        
     },
     mounted() {
-        this.getProducts;
+        this.getProducts();
     },
     methods: {
         getProduct(id) {
@@ -39,7 +40,7 @@
             this.loading = true;
             axios.get('/Admin/products')
                 .then(res => {
-                    console.log(res);
+                    console.log(res.data);
                     this.products = res.data;
                 })
                 .catch(err => {
@@ -51,7 +52,7 @@
         },
         createProduct() {
             this.loading = true;
-            axios.post('/Admin.prodcuts', this.productModel)
+            axios.post('/Admin/products', this.productModel)
                 .then(res => {
                     console.log(res.data);
                     this.products.push(res.data);
@@ -61,11 +62,12 @@
                 })
                 .then(() => {
                     this.loading = false;
+                    this.editing = false;
                 });
         },
         updateProduct() {
             this.loading = true;
-            axios.put('/Admin.prodcuts', this.productModel)
+            axios.put('/Admin/products', this.productModel)
                 .then(res => {
                     console.log(res.data);
                     this.products.splice(this.objectIndex, 1, res.data);
@@ -75,11 +77,12 @@
                 })
                 .then(() => {
                     this.loading = false;
+                    this.editing = false;
                 });
         },
         deleteProduct(id, index) {
             this.loading = true;
-            axios.get('/Admin/products' + id)
+            axios.delete('/Admin/products/' + id)
                 .then(res => {
                     console.log(res);
                     this.products.splice(index, 1)
@@ -91,9 +94,17 @@
                     this.loading = false;
                 });
         },
+        newProduct() {
+            this.editing = true;
+            this.productModel.id = 0;
+        },
         editProduct(id, index) {
             this.objectIndex = index;
             this.getProduct(id);
+            this.editing = true;
+        },
+        cancel() {
+            this.editing = false;
         }
     },
     computed: {

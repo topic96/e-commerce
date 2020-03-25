@@ -25,11 +25,12 @@ namespace Shop.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // fixed 404 error
+            services.AddControllersWithViews();
+            //services.AddMvc(option => option.EnableEndpointRouting = false); // using mvc
+
             services.AddRazorPages();
 
-            // fixed 404 error
-            //services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
         }
@@ -47,6 +48,9 @@ namespace Shop.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // using mvc
+            // app.UseMvc();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
