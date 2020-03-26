@@ -25,6 +25,13 @@ namespace Shop.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // session added
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "Cart";
+                options.Cookie.MaxAge = TimeSpan.FromDays(365);
+            });
+
             // fixed 404 error
             services.AddControllersWithViews();
             //services.AddMvc(option => option.EnableEndpointRouting = false); // using mvc
@@ -58,6 +65,8 @@ namespace Shop.UI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession(); // session added
 
             app.UseEndpoints(endpoints =>
             {

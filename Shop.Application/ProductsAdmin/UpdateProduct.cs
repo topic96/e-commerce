@@ -26,6 +26,7 @@ namespace Shop.Application.ProductsAdmin
             product.Value = request.Value;
 
             await _context.SaveChangesAsync();
+
             return new Response
             {
                 Id = product.Id,
