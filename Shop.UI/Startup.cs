@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop.Database;
+using Stripe;
 
 namespace Shop.UI
 {
@@ -40,6 +41,11 @@ namespace Shop.UI
 
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
+
+
+            //Stripe config
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

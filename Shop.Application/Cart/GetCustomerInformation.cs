@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.Domain.Models;
+
 
 namespace Shop.Application.Cart
 {
@@ -17,7 +19,7 @@ namespace Shop.Application.Cart
             _session = session;
         }
 
-        public class Request
+        public class Response
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
@@ -25,22 +27,32 @@ namespace Shop.Application.Cart
             public string PhoneNumber { get; set; }
 
 
-            public string Adress1 { get; set; }
-            public string Adress2 { get; set; }
+            public string Address1 { get; set; }
+            public string Address2 { get; set; }
             public string City { get; set; }
             public string PostCode { get; set; }
         }
 
-        public Request Do()
+        public Response Do()
         {
             var stringObject = _session.GetString("customer-info");
 
             if (String.IsNullOrEmpty(stringObject))
                 return null;
 
-            var response = JsonConvert.DeserializeObject<Request>(stringObject);
+            var customerInformation = JsonConvert.DeserializeObject<CustomerInformation>(stringObject);
 
-            return response;
+            return new Response
+            {
+                FirstName = customerInformation.FirstName,
+                LastName = customerInformation.LastName,
+                Email = customerInformation.Email,
+                PhoneNumber = customerInformation.PhoneNumber,
+                Address1 = customerInformation.Address1,
+                Address2 = customerInformation.Address2,
+                City = customerInformation.City,
+                PostCode = customerInformation.PostCode
+            };
         }
     }
 }

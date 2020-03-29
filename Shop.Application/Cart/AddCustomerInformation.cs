@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.Domain.Models;
 
 namespace Shop.Application.Cart
 {
@@ -27,6 +28,7 @@ namespace Shop.Application.Cart
             [Required]
             [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
+            [Required]
             [DataType(DataType.PhoneNumber)]
             public string PhoneNumber { get; set; }
 
@@ -42,8 +44,19 @@ namespace Shop.Application.Cart
 
         public void Do(Request request)
         {
+            var customerInformation = new CustomerInformation
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Address1 = request.Address1,
+                Address2 = request.Address2,
+                City = request.City,
+                PostCode = request.PostCode
+            };
 
-            var stringObject = JsonConvert.SerializeObject(request);
+            var stringObject = JsonConvert.SerializeObject(customerInformation);
 
 
             _session.SetString("customer-info", stringObject);
