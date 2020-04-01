@@ -69,7 +69,8 @@
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: 'Jenny Rosen'
+                        name: card.name,
+                        orderId: card.orderId
                     }
                 }
             }).then(function (result) {

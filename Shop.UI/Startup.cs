@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +31,7 @@ namespace Shop.UI
             services.AddSession(options =>
             {
                 options.Cookie.Name = "Cart";
-                options.Cookie.MaxAge = TimeSpan.FromDays(365);
+                options.Cookie.MaxAge = TimeSpan.FromMinutes(20);
             });
 
             // fixed 404 error
@@ -41,6 +42,8 @@ namespace Shop.UI
 
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
+
+            //services.AddIdentity<IdentityUser>();
 
 
             //Stripe config

@@ -29,6 +29,8 @@
         </div>
     </footer>
 
+    @await Component.InvokeAsync("Cart") 
+
     <environment include="Development">
         <script src="~/js/site.js" asp-append-version="true"></script>
 

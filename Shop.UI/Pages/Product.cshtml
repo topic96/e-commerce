@@ -1,5 +1,5 @@
 ﻿@page "{name}"
-@model Shop.UI.Pages.ProductModel
+@model ProductModel
 @{
 }
 
@@ -9,7 +9,6 @@
     <p>@Model.Product.Value</p>
     <div>
         <form method="post">
-
             <label>Stock</label>
             <select asp-for="CartViewModel.StockId">
                 @foreach (var s in Model.Product.Stock)

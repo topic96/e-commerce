@@ -14,15 +14,16 @@ namespace Shop.Database
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Stock> Stock { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Order> Orders { get; set; }
         // many to many relationship, down bellow we configure primary key
-        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderStock> OrderStocks { get; set; }
+        public DbSet<StockOnHold> StocksOnHold { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<OrderProduct>()
-                .HasKey(x => new { x.ProductId, x.OrderId });
+            modelBuilder.Entity<OrderStock>()
+                .HasKey(x => new { x.StockId, x.OrderId });
         }
 
     }

@@ -25,20 +25,25 @@ namespace Shop.UI.Pages
 
         public GetProduct.ProductViewModel Product { get; set; }
 
-        public IActionResult OnGet(string name)
+        public async Task<IActionResult> OnGet(string name)
         {
-            Product = new GetProduct(_ctx).Do(name.Replace("-", " "));
+            Product = await new GetProduct(_ctx).Do(name.Replace("-", " "));
             if (Product == null)
                 return RedirectToPage("Index");
             else
                 return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            new AddToCart(HttpContext.Session).Do(CartViewModel);
+            var stockAdded = await new AddToCart(HttpContext.Session, _ctx).Do(CartViewModel);
 
-            return RedirectToPage("Cart");
+            if (stockAdded)
+                return RedirectToPage("Cart");
+            else
+                // TODO: add a warning
+                return Page();
+
         }
     }
 }
